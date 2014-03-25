@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    h1= pagetitle
+    form(method ='post')
+        label Bar
+        input(type='text', name="bar")
+        label Mesa
+        input(type='text', name="mesa")
+        label Pedido
+        input(type='text', name="pedido")
+        input(type='submit', value='Agregar')
+    
+    div#boton Boton
+    
+    ul
+     each item in lista
+         li #{item.fecha}

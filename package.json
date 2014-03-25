@@ -1,0 +1,14 @@
+{
+  "name": "cc_basic",
+  "version": "0.0.0",
+  "description": "Click client basico",
+  "main": "server.js",
+  "repository": "",
+  "author": "Karman Valenzuela",
+  "dependencies": {
+    "express": "~3.2.4",
+    "socket.io": "~0.9.14",
+    "jade": "~1.2.0",
+    "mongoose": "~3.8.8"
+  }
+}
