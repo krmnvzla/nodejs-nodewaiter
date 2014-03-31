@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>ClickClient</title>
+        <link href="css.css" rel="stylesheet" type="text/css" />
+        <!--<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>-->
+        <script src="jquery.min.js"></script>
+        <!--<script src="https://clickclient-c9-karman.c9.io/socket.io/socket.io.js"></script>-->
+        <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+        
+        <script>
+        	//FUNCIONES INI
+        	function getUrlVars() {
+			    var vars = {};
+			    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+			        vars[key] = value;
+			    });
+			    return vars;
+			}
+			var urlvars = getUrlVars();
+			//urlvar.variable  <-acceder
+			
+			//FUNCIONES FIN
+			
+			//JQ
+            $(function() {
+            	
+            	//SOCKETS
+                var socket = io.connect('http://localhost:3000');
+                socket.on('connect', function() {
+                    console.log('--- socket.on connect');
+                    socket.emit("LISTA_PEDIDOS");
+                    socket.emit('CNN_ROOM','5');
+                });
+                
+				//PEDIDOS - Llena el select de los pedidos
+                socket.on('LISTA_PEDIDOS',function(lista) {
+					var i=0;
+					var option;
+					lista.forEach(function(entry) {
+						option += '<option value="'+ i + '">' + entry + '</option>';
+						i++;
+					});
+					$('#pedidos').append(option);					
+                });
+                
+                //BOTON
+                $("#boton1").on( "click", function( event ) {
+                    socket.emit("PEDIR",document.getElementById("pedidos").value);
+                    //console.log("esta madre esta jalando");
+                });
+                
+                 //MENSAJES
+                socket.on("MENSAJE", function(texto) {
+                    console.log(texto);
+                });
+            });
+   
+        </script>
+    </head>
+    
+    <body>
+        <div id="contenedor">
+            <div id="logo"></div>
+            <div id="boton1"></div>
+		
+            <form>
+                <select id="pedidos">
+                    
+                </select>
+              
+            </form>
+            
+            
+        </div>
+            
+    </body>
+    
+</html>

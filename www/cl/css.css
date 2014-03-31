@@ -1,0 +1,110 @@
+@charset "utf-8";
+/* CSS Document */
+
+html, body{
+    margin:0px;
+	background-color:#060;
+	height:100%;
+	}
+	
+#contenedor {
+	background-color:#363;
+	width:auto;
+	height:100%;
+	}
+
+#logo{
+	height:25%;
+	background-image:url(img/memes_png.png);
+	background-size:contain;
+	background-position:center;
+	background-repeat:no-repeat;
+	}
+	
+
+
+#boton1 {
+	height:65%;
+	
+	background-image:url(img/btn_rojo_up.png);
+	background-size:contain;
+	background-position:center;
+	background-repeat:no-repeat;
+	}
+#boton1:hover {
+	background-image:url(img/btn_rojo.png);
+	}
+#boton1:active {
+	background-image:url(img/btn_verde.png);
+	}
+#boton1:focus {
+	background-image:url(img/btn_amarillo.png);
+	}
+
+
+
+
+select {
+    width: 100%;
+    height:100%;
+    
+    padding:3px;
+    margin: 0;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    background: #f8f8f8;
+    color:#888;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+}
+
+/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    select {
+        
+        padding-right:18px;
+        font-size:3em;
+    }
+}
+
+form {
+    margin: 0 auto; /*Centrar*/
+    
+    
+    position:relative;
+    height:10%;
+    width:90%;
+    
+}
+form:after {
+    content:'<>';
+    font:11px "Consolas", monospace;
+    color:#aaa;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+    right:8px; top:2px;
+    padding:0 0 2px;
+    border-bottom:1px solid #ddd;
+    position:absolute;
+    pointer-events:none;
+}
+form:before {
+    content:'';
+    right:6px; top:0px;
+    width:20px; height:20px;
+    background:#f8f8f8;
+    position:absolute;
+    pointer-events:none;
+    display:block;
+}
