@@ -33,11 +33,23 @@
                 socket.on('connect', function() {
                     console.log('--- socket.on connect');
                     socket.emit('CNN_ROOM','5');
+                    socket.emit('LISTA_PEDIDOS');
+                });
+                
+                //PEDIDOS - Llena el select de los pedidos
+                socket.on('LISTA_PEDIDOS',function(lista) {
+					var i=0;
+					var option;
+					lista.forEach(function(entry) {
+						option += '<option value="'+ i + '">' + entry + '</option>';
+						i++;
+					});
+					$('#select-custom-1').append(option);					
                 });
                 
                 //BOTON
                 $("#boton1").on( "click", function( event ) {
-                    socket.emit("PEDIR",0);
+                    socket.emit("PEDIR",1);
                     //console.log("esta madre esta jalando");
                 });
                 
@@ -59,8 +71,18 @@
         </div>
         <div id="logo"></div>
         <div data-role="content">
+       
             <form>
-                <input id=boton1 type="button" data-icon="user" data-iconpos="top" value="Llamar mesero">
+                <input type="button" data-icon="user" data-iconpos="notext" value="Hablar">
+
+                <div class="ui-field-contain">
+                    <select name="select-custom-2" id="pedidos" data-native-menu="false" data-mini="true"></select>
+                    <select name="select-custom-1" id="select-custom-1" data-native-menu="false">
+
+                    </select>
+                </div>
+                
+                
             </form>
 
         </div>
