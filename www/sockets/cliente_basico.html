@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <meta name=”viewport” content=”width=device-width, initial-scale=1.0, maximum-scale=2″ />
     <title>ClickClient</title>
-        <link href="style.css" rel="stylesheet" type="text/css" />
-        <script src="jquery.min.js"></script>
+        
         <script src="../socket.io/socket.io.js"></script>
+        <script src="../js/jquery.min.js"></script>
+        
+        <script src="../js/jquery.mobile/jquery.mobile.custom.js"></script>
+        <script src="../js/jquery.mobile/jquery.mobile.custom.min.js"></script>
+
+        <link href="../js/jquery.mobile/jquery.mobile.custom.structure.css" rel="stylesheet" type="text/css" />
+        <link href="../js/jquery.mobile/jquery.mobile.custom.structure.min.css" rel="stylesheet" type="text/css" />
+        <link href="../js/jquery.mobile/jquery.mobile.custom.theme.css" rel="stylesheet" type="text/css" />
+        <link href="../js/jquery.mobile/jquery.mobile.custom.theme.min.css" rel="stylesheet" type="text/css" />
+        
         
         <script>
         	//FUNCIONES INI
@@ -20,31 +30,19 @@
 			
 			//FUNCIONES FIN
 			
-			//JQ
+            //JQ
             $(function() {
             	
             	//SOCKETS
                 var socket = io.connect('https://nodejs-nodewaiter_-c9-karmaniako.c9.io');
                 socket.on('connect', function() {
                     console.log('--- socket.on connect');
-                    socket.emit("LISTA_PEDIDOS");
                     socket.emit('CNN_ROOM','5');
-                });
-                
-				//PEDIDOS - Llena el select de los pedidos
-                socket.on('LISTA_PEDIDOS',function(lista) {
-					var i=0;
-					var option;
-					lista.forEach(function(entry) {
-						option += '<option value="'+ i + '">' + entry + '</option>';
-						i++;
-					});
-					$('#pedidos').append(option);					
                 });
                 
                 //BOTON
                 $("#boton1").on( "click", function( event ) {
-                    socket.emit("PEDIR",document.getElementById("pedidos").value);
+                    socket.emit("PEDIR",1);
                     //console.log("esta madre esta jalando");
                 });
                 
@@ -58,19 +56,18 @@
     </head>
     
     <body>
-        <div id="contenedor">
-            <div id="logo"></div>
-            <div id="boton1"></div>
-		
-            <form>
-                <select id="pedidos">
-                    
-                </select>
-              
-            </form>
-            
-            
+    
+    
+    <div data-role="page" id="inicio" >
+        <div data-role="header">
+            <h1> Inicio </h1>
         </div>
+        <div id="logo"></div>
+        <form>
+            <input type="button" data-icon="delete" data-iconpos="notext" value="Hablar">
+        </form>
+    </div>
+ 
             
     </body>
     
