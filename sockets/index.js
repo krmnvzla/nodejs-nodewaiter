@@ -2,10 +2,16 @@
 
 
 module.exports = function (io){
+	/*
 var Config = require('../models/config.js');
 var OpcionesDePedidos = Config.OpcionesDePedidos;
 var NumeroDeMesas = Config.NumeroDeMesas;
 var MaxElementosLog = Config.MaxElementosLog;
+*/
+var config = require('../config.js');
+var OpcionesDePedidos = config.pedidos;
+var NumeroDeMesas = config.mesas;
+var MaxElementosLog = config.log;
 
  console.log("+++++op" + OpcionesDePedidos);
 

@@ -1,8 +1,8 @@
-// ROUTERS
+// ROUTES
 
 module.exports = function(app){
 
-var BD = require('../models/db/index.js');   
+var BD = require('../models/index.js');   
 
     //INDEX
     app.get('/',function(req, res){

@@ -8,7 +8,7 @@ var server = http.createServer(router);
 
 
 
-//Vistas y layouts
+//VIEWS & LAYOUTS
 router.configure(function() {
     router.set('view options', { layout: false });
     router.set('views',__dirname + '/views');
@@ -22,8 +22,8 @@ require('./routes')(router);
 var io = socketio.listen(server);
 require('./sockets')(io);
 
-
-server.listen(process.env.PORT || 80, process.env.IP || "127.0.0.1", function(){
+//RUN SERVER
+server.listen(process.env.PORT || 3000, process.env.IP || "127.0.0.1", function(){
   var addr = server.address();
   console.log("Servidor escuchando en: ", addr.address + ":" + addr.port);
 });
