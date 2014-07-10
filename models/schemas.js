@@ -1,47 +1,67 @@
-    //--SCHEMAS INI
-	var mongoose = require('mongoose');
-    var Schema = mongoose.Schema;
+//--SCHEMAS INI
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var clienteSchema = new Schema({
+    empresa:     	String
+    ,sucursal:		String
+    ,rfc:       	String
+    ,direccion: {
+	 local: 	String
+	,plaza: 	String
+	,calle:  	String
+	,numero:	Number            
+	,colonia: 	String
+	,ciudad: 	String
+	,estado: 	String
+	,gps: {
+	     x:  	Number
+	    ,y: 	Number
+	}
+    }
+    ,contacto: {
+	nombre:		String
+	,apellido:	String
+	,puesto:	String
+	,telefono1:	String
+    }
+    ,config:{
+	 mesas:      	Number	//Numero de mesas del local
+	,meseros:   	Number	//Numero limite de meseros o sockets
+	,log:       	Number	//Limite de log por mesero
+	//atributo con limite de tiempo de conexion para sockets	    
+    }
+});
+
+var orden = new Schema({
+    id_cliente:{
+	empresa:	String
+	,sucursal:	String
+    }
+    ,mesa:		String
+    ,socket:		String
+    ,usuario:{	
+	socialkey:	String
+	/*vvv-Datos extraidos del login*/
+	,uid:		String	//user id de fb o tw
+	,nombre:	String	
+	,apellido:	String
+	,email:		String
+	,foto:		String	//url de imagen de perfil
+    }
+});
+
+module.exports.ordenSchema = new Schema({
+    restobar:   	String
+    ,mesa:      	String  
+    ,pedido:    	Number
+    ,fecha:     { type: Date, default: Date.now }
+    ,usuario: {
+	socket:    	String
+	,nombre:    	String
+	,apellido:  	String
+    }
+});
     
-    var restobarSchema = new Schema({
-        nombre:     String
-        ,telefono:  String
-        ,rfc:       String
-        ,direccion: {
-            calle:  String
-            ,numero:Number
-            ,local: String
-            ,plaza: String
-            ,gps: {
-                x:  Number
-                ,y: Number
-            }
-        }
-        ,encargado: {
-            nombre:     String
-            ,apellido:  String
-            ,telefono1: String
-            ,telefono2: String
-            ,direccion: String
-        }
-        ,config:{
-            mesas:      Number
-            ,meseros:   Number
-            ,log:       Number
-            //limite de tiempo de conexion para sockets
-        }
-    });
-    
-    module.exports.ordenSchema = new Schema({
-        restobar:   String
-        ,mesa:      String  
-        ,pedido:    Number
-        ,fecha:     { type: Date, default: Date.now }
-        ,usuario: {
-            socket:    String
-            ,nombre:    String
-            ,apellido:  String
-        }
-    });
-	
-	console.log('--Schemas..');
-    //--SCHEMAS FIN
+    console.log('--Schemas..');
+//--SCHEMAS FIN
