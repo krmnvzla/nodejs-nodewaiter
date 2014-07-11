@@ -12,7 +12,7 @@ var BD = require('../models/index.js');
             });
     });  
     
-    //AGREGAR - FUNCIONANDO - FUNCIONA
+    //AGREGAR
     app.get('/agregar',function(req, res){
         res.render('agregar', { 
             pagetitle: "Titulo index", 
@@ -20,18 +20,27 @@ var BD = require('../models/index.js');
             });
     });
     
-	//AGREGAR ORDEN POST - FUNCIONA
+    //AGREGAR POST
     app.post('/agregar',function(req, res){
-        //BD.agregarOrden({restobar:req.param('bar'),mesa:req.param('mesa'),pedido:req.param('pedido')}, function(e){
-        BD.agregarOrden({restobar:2,mesa:2,pedido:2}, function(e){
-            res.render('index', { 
-                pagetitle: "Se agrego"
-                //,lista: ""
-                });
-        });
-    });	
+	BD.addOrder(
+	    {
+		id_cliente:{
+		    empresa:	"Empresa Ejemplo"
+		    ,sucursal:	"1"
+		}
+		,mesa:		5
+		,socket:	"socket"
+		,usuario_id:	"ObjetoId"
+	    }
+	)
+	res.render('agregar', { 
+            pagetitle: "Agregado!", 
+            lista: "Esta es una lista"
+	});
+    });
+
     
-    //EXTRAE LISTA DE ORDENES - FUNCIONA
+    //LISTA DE ORDENES
     app.get('/lalista00', function(request,response){
         return BD.lista( function(lista, err){
             if(!err){

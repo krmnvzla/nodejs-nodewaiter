@@ -33,23 +33,27 @@ var clienteSchema = new Schema({
     }
 });
 
-var orden = new Schema({
-    id_cliente:{
+module.exports.Sorden = new Schema({
+    fecha:     { type: Date, default: Date.now }
+    ,id_cliente:{
 	empresa:	String
 	,sucursal:	String
     }
-    ,mesa:		String
+    ,mesa:		Number
     ,socket:		String
-    ,usuario:{	
-	socialkey:	String
-	/*vvv-Datos extraidos del login*/
-	,uid:		String	//user id de fb o tw
-	,nombre:	String	
-	,apellido:	String
-	,email:		String
-	,foto:		String	//url de imagen de perfil
-    }
+    ,usuario_id:	String //Modificar	
 });
+module.exports.orden0;//PRUEBA
+
+var usuario = new Schema ({
+    socialkey:		String
+    /*vvv-Datos extraidos del login*/
+    ,uid:		String	//user id de fb o tw
+    ,nombre:		String	
+    ,apellido:		String
+    ,email:		String
+    ,foto:		String	//url de imagen de perfil
+})
 
 module.exports.ordenSchema = new Schema({
     restobar:   	String

@@ -14,6 +14,8 @@ router.configure(function() {
     router.set('views',__dirname + '/views');
     router.set('view engine', 'jade');
     router.use(express.static(path.resolve(__dirname, 'www')));
+    router.use(express.bodyParser());
+    router.use(express.methodOverride());
 });
 
 //ROUTERS
