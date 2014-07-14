@@ -1,71 +1,72 @@
-//--SCHEMAS INI
+////////////
+//-MOELS SCHEMAS-//
+////////////
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+require('./dbcnn.js');
 
-var clienteSchema = new Schema({
-    empresa:     	String
-    ,sucursal:		String
-    ,rfc:       	String
-    ,direccion: {
-	 local: 	String
-	,plaza: 	String
-	,calle:  	String
-	,numero:	Number            
-	,colonia: 	String
-	,ciudad: 	String
-	,estado: 	String
+var clientSchema = new Schema({
+    company:     	String	//Empresa
+    ,branch:		String	//Sucursal
+    ,id_company:       	String	//RFC
+    ,address: {			//Dirección
+	mall:	 	String	
+	,street:  	String
+	,number:	Number            
+	,suburb: 	String
+	,city: 		String
+	,country: 	String
 	,gps: {
 	     x:  	Number
 	    ,y: 	Number
 	}
     }
-    ,contacto: {
-	nombre:		String
-	,apellido:	String
-	,puesto:	String
-	,telefono1:	String
+    ,contact: {			//Contacto:
+	name:		String
+	,firstname:	String
+	,lastname:	String
+	,phone:		String
     }
-    ,config:{
-	 mesas:      	Number	//Numero de mesas del local
-	,meseros:   	Number	//Numero limite de meseros o sockets
-	,log:       	Number	//Limite de log por mesero
-	//atributo con limite de tiempo de conexion para sockets	    
+    ,config:{			//Configuración
+	 tables:      	Number	//Numero de mesas del local
+	,waiters:   	Number	//Numero limite de meseros o sockets
+	,loglimit:     	Number	//Limite de log por mesero
+	//Agregar atributo con limite de tiempo de conexion para sockets	    
     }
 });
 
-module.exports.Sorden = new Schema({
-    fecha:     { type: Date, default: Date.now }
-    ,id_cliente:{
-	empresa:	String
-	,sucursal:	String
+var orderSchema = new Schema({
+    date:     { type: Date, default: Date.now }
+    ,id_client:{
+	company:	String
+	,branch:	String
     }
-    ,mesa:		Number
+    ,table:		Number
     ,socket:		String
-    ,usuario_id:	String //Modificar	
+    ,id_user:		String //Modificar a ObjectID
+    ,msj:		String //Mensaje explicito de la orden
 });
-module.exports.orden0;//PRUEBA
 
-var usuario = new Schema ({
+var userSchema = new Schema ({
     socialkey:		String
     /*vvv-Datos extraidos del login*/
     ,uid:		String	//user id de fb o tw
-    ,nombre:		String	
-    ,apellido:		String
+    ,name:		String	
+    ,firstame:		String
+    ,lastname:		String
     ,email:		String
-    ,foto:		String	//url de imagen de perfil
+    ,pic:		String	//url de imagen de perfil
 })
 
-module.exports.ordenSchema = new Schema({
-    restobar:   	String
-    ,mesa:      	String  
-    ,pedido:    	Number
-    ,fecha:     { type: Date, default: Date.now }
-    ,usuario: {
-	socket:    	String
-	,nombre:    	String
-	,apellido:  	String
-    }
-});
+mongoose.model('client', clientSchema,'clients');
+mongoose.model('order', orderSchema, 'orders' );
+mongoose.model('user', userSchema, 'users');
+
+
+module.exports.Client = mongoose.model('client')
+module.exports.Order = mongoose.model('order');
+module.exports.User = mongoose.model('user');
     
-    console.log('--Schemas..');
+console.log('--Models load..');
 //--SCHEMAS FIN
