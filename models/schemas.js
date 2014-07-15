@@ -59,14 +59,9 @@ var userSchema = new Schema ({
     ,pic:		String	//url de imagen de perfil
 })
 
-mongoose.model('client', clientSchema,'clients');
-mongoose.model('order', orderSchema, 'orders' );
-mongoose.model('user', userSchema, 'users');
-
-
-module.exports.Client = mongoose.model('client')
-module.exports.Order = mongoose.model('order');
-module.exports.User = mongoose.model('user');
+module.exports.Client = mongoose.model('client', clientSchema,'clients');
+module.exports.Order = mongoose.model('order', orderSchema, 'orders' );
+module.exports.User = mongoose.model('user', userSchema, 'users');
     
 console.log('--Models load..');
 //--SCHEMAS FIN
