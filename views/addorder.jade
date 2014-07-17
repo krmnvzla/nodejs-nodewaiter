@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    h1= pagetitle
+    
+    form(method ='post')
+        label Company
+        input(type='text', name="txtCompany")
+        label Branch
+        input(type='text', name="txtBranch")
+        label Table
+        input(type='text', name="txtTable")
+        label Socket
+        input(type='text', name="txtSocket")
+        label ID User
+        input(type='text', name="txtIdUser")
+        label Message
+        input(type='text', name="txtMsg")
+        
+        input(type='submit', value='AddOrder')

@@ -2,13 +2,9 @@ var http = require('http');
 var path = require('path');
 var socketio = require('socket.io');
 var express = require('express');
-
 var router = express();
 var server = http.createServer(router);
 
-
-
-//VIEWS & LAYOUTS
 router.configure(function() {
     router.set('view options', { layout: false });
     router.set('views',__dirname + '/views');
@@ -18,7 +14,7 @@ router.configure(function() {
     router.use(express.methodOverride());
 });
 
-//ROUTERS
+//ROUTES
 require('./routes')(router);
 
 var io = socketio.listen(server);

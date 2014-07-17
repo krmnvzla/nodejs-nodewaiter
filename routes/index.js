@@ -6,42 +6,19 @@ module.exports = function(app){
     
     var M = require('../models/index.js'); //Models functions
     
-    //Index
+//INDEX
     app.get('/',function(req, res){
         res.render('index', { 
             pagetitle: "Index", 
-            lista: "Esta es una lista"
             });
     });     
       
+//ORDERS//
     //Obtener ordenes por compañia y/o sucursal
     //Get orders by company and/or branch
-    app.get('/:company/:branch?',function(req,res){
-        M.orderBy(req.params.company,req.params.branch,function(err,docs){
-            res.json(docs);
-        });
-    });       
+       
 
-
-    
-    /*
-    app.get('/:company/:branch?',function(req,res){       
-        if (req.params.company) {
-            var query = {'id_client.company':req.params.company};    
-            if (req.params.branch){
-                var query = {id_client:{company:req.params.company,branch:req.params.branch}};                
-            }            
-            M.find('orders',query,function (err, docs) {
-                    console.dir(docs);
-                    return res.json(docs);
-                }
-            );
-        }else{
-        res.send('Sucursal invalida')
-        }        
-    });
-    */
-    app.get('/allOrders',function(req,res,next){
+    app.get('/orders/all',function(req,res,next){
         M.find('orders',{},function (err, docs) {
                 console.dir(docs);
                 return res.json(docs);
@@ -49,28 +26,50 @@ module.exports = function(app){
         );    
     });
     
-    app.get('/addOrder',function(req,res){
-        res.render('agregar', { 
-            pagetitle: "Titulo index", 
-            lista: "Esta es una lista"
+    app.get('/orders/add',function(req,res){
+        res.render('addorder', { 
+            pagetitle: "Add order", 
+            //lista: "Esta es una lista"
             });
     });
     
-    app.post('/addOrder',function(req,res,next){    
+    app.post('/orders/add',function(req,res,next){    
+       
         var data = {
-                        id_client:{
-                            company:	'ejemplo'
-                            ,branch:	'sucursal'
-                        }
-                        ,table:		1
-                        ,socket:	'socket'
-                        ,id_user:	'id_usuario'//Modificar a ObjectID
-                        ,msj:		'Mensaje' //Mensaje explicito de la orden
-                    }       
-        M.addOrder(/*req.body*/data, function(err, order){
-            if (err) return next(err);
+            id_client:{
+                company:	req.body.txtCompany
+                ,branch:	req.body.txtBranch
+            }
+            ,table:		req.body.txtTable
+            ,socket:	req.body.txtSocket
+            ,id_user:	req.body.txtIdUser
+            ,msg:		req.body.txtMsg //Mensaje explicito de la orden
+        }
+        
+        M.addOrder(data, function(err, order){
+            if (err) next(new Error(err);
             return res.json(order);
         });
+        
     });
     
+    app.get('/orders/:company/:branch?',function(req,res){
+        M.ordersBy(req.params.company,req.params.branch,function(err,docs){
+            res.json(docs);
+        });
+    });
+
+//COMPANY    
+    //Register Company
+    //Find company
+    //Edit company
+    //Delete company
+//CONFIG
+    //Find config by company/branch
+    //Edit config
+//USER
+    //Register user
+    //Find user
+    //Edit user
+    //Delete user
 }

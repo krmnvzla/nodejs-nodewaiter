@@ -45,7 +45,7 @@ var orderSchema = new Schema({
     ,table:		Number
     ,socket:		String
     ,id_user:		String //Modificar a ObjectID
-    ,msj:		String //Mensaje explicito de la orden
+    ,msg:		String //Mensaje explicito de la orden
 });
 
 var userSchema = new Schema ({
