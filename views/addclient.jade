@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    h1= pagetitle
+    
+    form(method ='post')
+        label Company:
+        input(type='text', name="Company")
+        label Branch:
+        input(type='text', name="Branch")
+        label ID Company(RFC):
+        input(type='text', name="Company")
+        label Mall:
+        input(type='text', name="Mall")
+        label Street:
+        input(type='text', name="Street")
+        label Number:
+        input(type='text', name="Number")
+        label Suburb:
+        input(type='text', name="Suburb")
+        label City:
+        input(type='text', name="City")
+        label Country:
+        input(type='text', name="Country")
+        label GPS x:
+        input(type='text', name="gpsx")
+        label GPS y:
+        input(type='text', name="gpsy")
+        label Contact:
+        label Cont. Name:
+        input(type='text', name="cName")
+        label Cont. Fist Name:
+        input(type='text', name="cFName")
+        label Cont. Last Name:
+        input(type='text', name="cLName")
+        label Cont. Number:
+        input(type='text', name="cNumber")
+        
+        input(type='submit', value='Add')

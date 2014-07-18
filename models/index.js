@@ -35,5 +35,15 @@ module.exports = {
 	newOrder.save(function(err, savedOrder) {
             callback(err, savedOrder); 
         });
-    }
+    },
+    
+    addClient: function(data, callback){
+	models.Client.create;
+	var newClient= new models.Client(data);
+	newClient.save(function(err, savedClient) {
+            callback(err, savedClient); 
+        });
+    }    
+    
+    
 };
