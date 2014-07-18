@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 require('./dbcnn.js');
 
 var clientSchema = new Schema({
-    company:     	String	//Empresa
+    company:     	{ type: String, required: true}	//Empresa
     ,branch:		String	//Sucursal
     ,id_company:       	String	//RFC
     ,address: {			//Dirección
@@ -29,9 +29,9 @@ var clientSchema = new Schema({
 	,phone:		String
     }
     ,config:{			//Configuración
-	 tables:      	Number	//Numero de mesas del local
-	,waiters:   	Number	//Numero limite de meseros o sockets
-	,loglimit:     	Number	//Limite de log por mesero
+	 tables:      	{ type: Number, min: 0, max: 127, default: 5 }	//Numero de mesas del local
+	,waiters:   	{ type: Number, min: 0, max: 64, default: 5 }	//Numero limite de meseros o sockets
+	,loglimit:     	{ type: Number, min: 3, max: 127, default: 10 }	//Limite de log por mesero
 	//Agregar atributo con limite de tiempo de conexion para sockets	    
     }
 });
@@ -39,10 +39,10 @@ var clientSchema = new Schema({
 var orderSchema = new Schema({
     date:     { type: Date, default: Date.now }
     ,id_client:{
-	company:	String
+	company:	{ type: String, required: true}
 	,branch:	String
     }
-    ,table:		Number
+    ,table:		{ type: Number, min: 0, max: 127 }
     ,socket:		String
     ,id_user:		String //Modificar a ObjectID
     ,msg:		String //Mensaje explicito de la orden
