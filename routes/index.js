@@ -47,7 +47,7 @@ module.exports = function(app){
         }
         
         M.addOrder(data, function(err, order){
-            if (err) next(new Error(err);
+            if (err) next(new Error(err));
             return res.json(order);
         });
         
@@ -72,4 +72,20 @@ module.exports = function(app){
     //Find user
     //Edit user
     //Delete user
+
+//ERRORS 
+    //Errors page not found.
+    app.get('*', function(req, res, next) {
+	var err = new Error();
+	err.status = 404;
+	next(err);
+    });
+    // handling 404 errors
+    app.use(function(err, req, res, next) {
+      if(err.status !== 404) {
+	return next();
+      }
+     
+      res.send(err.message || 'Error 404 - Not found.');
+    });
 }
